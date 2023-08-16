@@ -1,0 +1,20 @@
+@layer base, components, utilities;
+
+@layer base {
+  @unocss preflights;
+
+	button {
+		scale: 1.0;
+		transition: scale 400ms ease-out;
+	}
+
+	button:active {
+		scale: 0.9;
+		transition: scale 200ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+	}
+}
+
+@layer utilities {
+  @unocss default;
+  @unocss;
+}

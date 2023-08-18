@@ -10,12 +10,12 @@
 <slot />
 
 <style lang="postcss">
-	:global(html) {
-		--bg: white;
-		--fg: black;
+	:global(:root, html, ::backdrop) {
 		--bg: #ffffe3;
 		--fg: #10100e;
+	}
 
+	:global(html) {
 		--apply: select-none h-full font-sans bg-bg color-fg;
 
 		-webkit-tap-highlight-color: transparent;

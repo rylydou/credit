@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { amount, currency_format } from '$lib/store'
+	import { amount, format } from '$lib/store'
 
-	$: segs = $currency_format.format($amount).split('.', 2)
+	$: segs = $format.format($amount).split('.', 2)
 	$: whole = segs[0]
 	$: fract = segs[1]
 </script>

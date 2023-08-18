@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { AccountTransaction } from '$lib/models'
-	import { currency_format_signed } from '$lib/store'
+	import { format_signed } from '$lib/store'
 
 	export let transaction: AccountTransaction
 
-	$: segs = $currency_format_signed.format(transaction.amount).split('.', 2)
+	$: segs = $format_signed.format(transaction.amount).split('.', 2)
 	$: whole = segs[0]
 	$: fract = segs[1]
 </script>

@@ -2,7 +2,6 @@ import { defineConfig, presetUno, presetTypography, presetWebFonts } from 'unocs
 import extractorSvelte from '@unocss/extractor-svelte'
 import transformerVariantGroup from '@unocss/transformer-variant-group'
 import transformerDirectives from '@unocss/transformer-directives'
-import presetIcons from '@unocss/preset-icons'
 
 export default defineConfig({
 	theme: {
@@ -14,12 +13,11 @@ export default defineConfig({
 	presets: [
 		presetUno({ dark: 'media' }),
 		presetTypography(),
-		presetIcons(),
 		presetWebFonts({
 			provider: 'fontshare',
 			fonts: {
 				sans: ['General Sans', 'sans-serif'],
-				mono: ['JetBrains Mono', 'monospace'],
+				mono: ['Nippo', 'monospace'], // 'JetBrains Mono'
 			}
 		}),
 	],

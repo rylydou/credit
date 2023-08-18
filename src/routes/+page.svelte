@@ -3,11 +3,13 @@
 	import { Header, Footer } from '$lib/parts'
 	import Create from '$lib/parts/Create.svelte'
 	import { transactions } from '$lib/store'
+
+	let create_dialog: Create
 </script>
 
 <Header />
-<Footer />
-<Create />
+<Footer on:create={() => create_dialog.open()} />
+<Create bind:this={create_dialog} />
 
 <div class="flex flex-col items-center px-6 pt-16 pb-32">
 	{#each $transactions as transaction}

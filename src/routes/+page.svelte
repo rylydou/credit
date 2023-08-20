@@ -1,19 +1,30 @@
 <script lang="ts">
 	import { Transaction } from '$lib/components'
-	import { Header, Footer } from '$lib/parts'
-	import Create from '$lib/parts/Create.svelte'
-	import { transactions } from '$lib/store'
+	import { Create, Footer, Header } from '$lib/parts'
+	import { account_name, initialize, transactions } from '$lib/store/account'
+	import { onMount, tick } from 'svelte'
 
 	let create_dialog: Create
+
+	onMount(async () => {
+		await tick()
+		await initialize()
+	})
 </script>
+
+<svelte:head>
+	<title>{$account_name} - Credit</title>
+</svelte:head>
 
 <Header />
 <Footer on:create={() => create_dialog.open()} />
 <Create bind:this={create_dialog} />
 
-<div class="flex flex-col items-center px-6 pt-16 pb-32">
-	{#each $transactions as transaction}
-		<Transaction {transaction} />
+<!-- It might be better to use Array.prototype.reverse() instead of
+	flex-row-reverse because accessibility is better -->
+<div class="flex flex-col items-center pt-16 pb-32">
+	{#each $transactions.reverse() as transaction (transaction.id)}
+		<Transaction {transaction} on:click={() => create_dialog.open(transaction)} />
 	{/each}
 </div>
 

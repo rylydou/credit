@@ -1,9 +1,10 @@
 @layer base, components, utilities;
 
 @layer base {
-  @unocss preflights;
+	@unocss preflights;
 
 	button {
+		background-color: unset;
 		scale: 1.0;
 		transition: scale 400ms ease-out;
 	}
@@ -15,6 +16,6 @@
 }
 
 @layer utilities {
-  @unocss default;
-  @unocss;
+	@unocss default;
+	@unocss;
 }

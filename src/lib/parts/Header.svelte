@@ -1,7 +1,18 @@
 <script lang="ts">
-	import { amount, format } from '$lib/store'
+	import { amount, format, format_point } from '$lib/store/account'
+	import { tweened } from 'svelte/motion'
+	import { cubicOut } from 'svelte/easing'
 
-	$: segs = $format.format($amount).split('.', 2)
+	const tween = tweened($amount, {
+		duration: 1000,
+		delay: 500,
+		easing: cubicOut,
+	})
+	$: {
+		$tween = $amount
+	}
+
+	$: segs = $format.format($tween).split($format_point, 2)
 	$: whole = segs[0]
 	$: fract = segs[1]
 </script>

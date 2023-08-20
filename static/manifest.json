@@ -1,0 +1,11 @@
+{
+	"name": "Credit",
+	"short_name": "Credit",
+	"description": "A credit tracking app.",
+	"lang": "en-US",
+	"display": "standalone",
+	"orientation": "portrait",
+	"background_color": "#ffffe3",
+	"theme_color": "#ffffe3",
+	"start_url": "."
+}

@@ -23,7 +23,7 @@
 <!-- It might be better to use Array.prototype.reverse() instead of
 	flex-row-reverse because accessibility is better -->
 <div class="flex flex-col items-center pt-16 pb-32">
-	{#each $transactions.reverse() as transaction (transaction.id)}
+	{#each $transactions as transaction (transaction.id)}
 		<Transaction {transaction} on:click={() => create_dialog.open(transaction)} />
 	{/each}
 </div>

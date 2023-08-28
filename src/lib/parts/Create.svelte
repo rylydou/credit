@@ -16,6 +16,7 @@
 	let amount_input_element: HTMLInputElement
 	export function open(transaction?: AccountTransaction) {
 		dialog_element.showModal()
+		amount_input_element.focus()
 
 		if (transaction == null) {
 			is_create_mode = true
@@ -24,7 +25,6 @@
 				amount: 0.0,
 			}
 			amount_input = '$'
-			amount_input_element.focus()
 		} else {
 			is_create_mode = false
 			_transaction = transaction
@@ -38,7 +38,7 @@
 		if (is_create_mode) {
 			$next_id++
 			_transaction.date = new Date()
-			$transactions.push(_transaction)
+			$transactions.unshift(_transaction)
 		}
 		$transactions = $transactions
 
@@ -178,70 +178,3 @@
 		{/if}
 	</div>
 </dialog>
-
-<style lang="postcss">
-	dialog:modal {
-		display: flex;
-	}
-
-	@keyframes anim-dialog {
-		from {
-			opacity: .1;
-			filter: blur(8px);
-			/* translate: 0 100%; */
-		}
-		to {
-			opacity: 1;
-			filter: blur(0px);
-			/* translate: 0 0%; */
-		}
-	}
-
-	dialog[open] > :first-child {
-		/* animation: anim-dialog 1000ms cubic-bezier(0.16, 1, 0.3, 1); */
-		animation: anim-dialog 400ms;
-	}
-
-	.sec {
-		/* b-t-1 b-bg last:b-b-1 */
-		--apply: relative
-			before:(content-[''] absolute left-2 right-2 -top-1px h-1px bg-bg);
-	}
-
-	.sec > span {
-		--apply: absolute -top-4 left-[50%] -translate-x-[50%] px-4 text-center bg-fg font-bold;
-	}
-
-	input {
-		--apply: appearance-none w-full h-16 p-4 bg-transparent rounded-3
-			placeholder:(c-bg opacity-50 text-center)
-			focus-within:(outline outline-4 outline-bg -outline-offset-2 placeholder:opacity-0);
-	}
-
-	input[type='text'] {
-		/* --apply: text-center
-			focus:(text-left) */
-	}
-
-	input[inputmode='decimal'] {
-		--apply: font-mono text-center text-2xl;
-	}
-
-	input[type='date'] {
-		--apply: text-center;
-	}
-
-	.radio-btn {
-		--apply: w-full bg-transparent font-bold
-			relative after:(content-[''] absolute -z-1 inset-0 rounded-3 bg-bg opacity-0);
-	}
-
-	.radio-btn:active {
-		--apply: after:(opacity-25 transition-opacity duration-200 ease-out);
-	}
-
-	.radio-btn.active {
-		--apply: c-fg
-			after:(opacity-100 transition-opacity duration-0);
-	}
-</style>

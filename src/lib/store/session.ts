@@ -1,15 +1,17 @@
-import localForage from "localforage"
-import { derived, get, writable } from 'svelte/store'
+import { create_storage, type Storage } from '$lib/storage'
+import { writable } from 'svelte/store'
 
-export const version_major = 1
-export const version_minor = 0
+export const version = 1
 
-export let store: LocalForage
+export let storage: Storage
 export async function initialize(): Promise<void> {
-	store = localForage.createInstance({
-		name: 'Credit',
-		storeName: 'session',
-		driver: [localForage.INDEXEDDB, localForage.LOCALSTORAGE, localForage.WEBSQL],
+	storage = create_storage({
+		version,
+		local_forage_options: { storeName: '_index', },
 	})
-	await store.ready()
+
+	storage.track('next_id', next_id, 1)
+	storage.load_all()
 }
+
+export const next_id = writable(1)

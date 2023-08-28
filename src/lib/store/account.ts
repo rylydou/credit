@@ -1,6 +1,6 @@
+import type { AccountTransaction } from '$lib/models'
+import { create_storage, type Storage } from '$lib/storage'
 import { derived, get, writable } from 'svelte/store'
-import type { AccountTransaction } from '../models'
-import { type Storage, create_storage } from '$lib/storage'
 
 export const version = 1
 
@@ -33,11 +33,11 @@ export const amount = derived(transactions, (transactions) => {
 })
 
 export const account_currency = writable('USD')
-export const format = derived(account_currency, (account_currency) => new Intl.NumberFormat('en-US', {
+export const format = derived(account_currency, (account_currency) => new Intl.NumberFormat(undefined, {
 	style: 'currency',
 	currency: account_currency,
 }))
-export const format_signed = derived(account_currency, (account_currency) => new Intl.NumberFormat('en-US', {
+export const format_signed = derived(account_currency, (account_currency) => new Intl.NumberFormat(undefined, {
 	style: 'currency',
 	currency: account_currency,
 	signDisplay: 'exceptZero'
